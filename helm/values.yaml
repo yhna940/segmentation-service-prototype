@@ -88,11 +88,14 @@ pvs:
     gcePersistentDisk: test-disk
     storage: 100Gi
     reclaimPolicy: Retain
+    accessModes:
+      - ReadWriteMany
   - name: tmp-pv
     gcePersistentDisk: tmp-disk
     storage: 100Gi
     reclaimPolicy: Delete
-
+    accessModes:
+      - ReadWriteMany
 pvcs:
   - name: data-pvc
     storage: 100Gi
