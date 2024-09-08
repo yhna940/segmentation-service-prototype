@@ -1,0 +1,22 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: patch-server
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/initial-scale: "{{ .Values.knativeService.autoscaling.initialScale }}"
+        autoscaling.knative.dev/target: "{{ .Values.knativeService.autoscaling.target }}"
+        autoscaling.knative.dev/max-scale: "{{ .Values.knativeService.autoscaling.maxScale }}"
+        autoscaling.knative.dev/scale-down-delay: "{{ .Values.knativeService.autoscaling.scaleDownDelay }}"
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: {{ .Values.knativeService.nodeSelector.accelerator | default "nvidia-tesla-t4" }}
+      containers:
+        - image: {{ .Values.knativeService.image.repository }}:{{ .Values.knativeService.image.tag | default .Chart.AppVersion }}
+          resources:
+            limits:
+              nvidia.com/gpu: "{{ .Values.knativeService.resources.limits.gpu }}"
+          ports:
+            - containerPort: {{ .Values.knativeService.containerPort | default 8000 }}
