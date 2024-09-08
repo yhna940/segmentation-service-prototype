@@ -1,14 +1,14 @@
-# Default values for dispatcher.
+# Default values for remote-segmentor.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: lunityounghwan/pytriton-dispatcher
+  repository: lunityounghwan/remote-segmentor-dispatcher
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.19"
+  tag: "v0.1.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -34,12 +34,12 @@ service:
 
 resources:
   limits:
-    cpu: "8"
-    memory: "8Gi"
+    cpu: "32"
+    memory: "32Gi"
     ephemeral-storage: "10Gi"
   requests:
-    cpu: "8"
-    memory: "8Gi"
+    cpu: "16"
+    memory: "16Gi"
     ephemeral-storage: "10Gi"
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -107,8 +107,18 @@ volumeAccessModes:
 
 storageClass: ""
 
-container:
-  args:
-    - "-u"
-    - "http://pytriton-server.default.svc.cluster.local"
-    - "-v"
+knativeService:
+  autoscaling:
+    initialScale: 2
+    target: 2
+    maxScale: 8
+    scaleDownDelay: "10m"
+  nodeSelector:
+    accelerator: "nvidia-tesla-t4"
+  image:
+    repository: "lunityounghwan/remote-segmentor-patch-server"
+    tag: "v0.1.0"
+  resources:
+    limits:
+      gpu: "1"
+  containerPort: 8000

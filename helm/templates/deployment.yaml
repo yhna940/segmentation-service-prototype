@@ -36,6 +36,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
+            - "-u"
+            - "http://patch-server.{{ .Release.Namespace }}.svc.cluster.local"
+            - "-v"
             {{- range .Values.container.args }}
             - "{{ . }}"
             {{- end }}
