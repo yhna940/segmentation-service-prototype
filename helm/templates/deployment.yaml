@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dispatcher.fullname" . }}
+  name: {{ include "dispatcher.fullname" . }}-dispatcher
   labels:
     {{- include "dispatcher.labels" . | nindent 4 }}
 spec:
@@ -37,11 +37,8 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "-u"
-            - "http://patch-server.{{ .Release.Namespace }}.svc.cluster.local"
+            - "http://{{ include "dispatcher.fullname" . }}-patch-server.{{ .Release.Namespace }}.svc.cluster.local"
             - "-v"
-            {{- range .Values.container.args }}
-            - "{{ . }}"
-            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

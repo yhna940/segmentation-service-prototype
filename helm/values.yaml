@@ -8,7 +8,7 @@ image:
   repository: lunityounghwan/remote-segmentor-dispatcher
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.0"
+  tag: "v0.1.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -88,11 +88,14 @@ pvs:
     gcePersistentDisk: test-disk
     storage: 100Gi
     reclaimPolicy: Retain
+    accessModes:
+      - ReadWriteMany
   - name: tmp-pv
     gcePersistentDisk: tmp-disk
     storage: 100Gi
     reclaimPolicy: Delete
-
+    accessModes:
+      - ReadWriteMany
 pvcs:
   - name: data-pvc
     storage: 100Gi
