@@ -29,6 +29,14 @@ repos:
       - id: terraform_validate
         files: ^infrastructure/terraform/
 
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v16.0.5
+    hooks:
+    - id: clang-format
+      types_or: [c++]
+      args: ["-fallback-style=none", "-style=file", "-i"]
+      files: ^dispatcher/
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:

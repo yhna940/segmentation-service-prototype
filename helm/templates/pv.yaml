@@ -1,0 +1,19 @@
+{{- range .Values.pvs }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .name }}
+spec:
+  capacity:
+    storage: {{ .storage }}
+  accessModes:
+    {{- toYaml $.Values.volumeAccessModes | nindent 4 }}
+  gcePersistentDisk:
+    pdName: {{ .gcePersistentDisk }}
+    fsType: ext4
+  persistentVolumeReclaimPolicy: {{ .reclaimPolicy }}
+  {{- if $.Values.storageClass }}
+  storageClassName: {{ $.Values.storageClass }}
+  {{- end }}
+---
+{{- end }}
