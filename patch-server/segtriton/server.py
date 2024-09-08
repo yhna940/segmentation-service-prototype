@@ -8,7 +8,6 @@ import torch
 from PIL import Image
 from pytriton.model_config import DynamicBatcher, ModelConfig, Tensor
 from pytriton.triton import Triton
-
 from segtriton.segmentor import Segmenter
 
 
