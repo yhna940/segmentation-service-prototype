@@ -21,13 +21,14 @@ No modules.
 | Name | Type |
 |------|------|
 | [google_container_cluster.primary](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster) | resource |
+| [google_client_config.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/client_config) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The cluster name | `string` | `"test-ecai"` | no |
-| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project name | `string` | `"lunit-ecai"` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The cluster name | `string` | n/a | yes |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project name | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | The region | `string` | `"asia-northeast3"` | no |
 
 ## Outputs

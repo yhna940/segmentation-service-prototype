@@ -1,19 +1,17 @@
 variable "project_id" {
   description = "The project name"
   type        = string
-  default     = "lunit-ecai"
+}
+
+variable "cluster_name" {
+  description = "The cluster name"
+  type        = string
 }
 
 variable "region" {
   description = "The region"
   type        = string
   default     = "asia-northeast3"
-}
-
-variable "cluster_name" {
-  description = "The cluster name"
-  type        = string
-  default     = "ecai-test"
 }
 
 terraform {
