@@ -1,0 +1,23 @@
+name: ⚙️ CI
+
+on: [pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 🐍 Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: 💾 Install pre-commit hook
+        run: |
+          pip install pre-commit
+          pre-commit install
+      - name: 🕵️ Run pre-commit
+        run: pre-commit run --all-files
