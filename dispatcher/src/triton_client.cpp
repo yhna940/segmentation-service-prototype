@@ -34,7 +34,7 @@ TritonClient::TritonClient(
 }
 
 cv::Mat
-TritonClient::run_inference(const cv::Mat& image)
+TritonClient::request_inference(const cv::Mat& image)
 {
   if (image.empty()) {
     throw std::runtime_error("Error: Image is empty");

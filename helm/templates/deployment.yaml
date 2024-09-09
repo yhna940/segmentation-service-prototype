@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "dispatcher.labels" . | nindent 4 }}
 spec:
+  strategy:
+    type: {{ .Values.strategy.type }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}

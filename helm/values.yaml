@@ -4,11 +4,14 @@
 
 replicaCount: 1
 
+strategy:
+  type: Recreate
+
 image:
   repository: lunityounghwan/remote-segmentor-dispatcher
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.1"
+  tag: "v0.1.2"
 
 imagePullSecrets: []
 nameOverride: ""

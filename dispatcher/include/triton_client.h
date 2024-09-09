@@ -21,7 +21,7 @@ class TritonClient {
       int retry_interval = 4);
 
   // Runs inference on an input image and returns the resulting mask
-  cv::Mat run_inference(const cv::Mat& image);
+  cv::Mat request_inference(const cv::Mat& image);
 
  private:
   std::string model_name_;
