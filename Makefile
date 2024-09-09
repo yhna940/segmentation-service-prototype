@@ -44,9 +44,6 @@ terraform-destroy:
 knative-setup:
 	bash ./infrastructure/script/knative-setup.sh
 
-# Build infrastructure and apply Knative setup
-infra-setup: terraform-init terraform-apply knative-setup
-
 # Helm install with namespace option
 helm-install:
 	helm install $(HELM_RELEASE_NAME) $(HELM_CHART_PATH) --namespace $(HELM_NAMESPACE) --create-namespace
@@ -58,6 +55,3 @@ helm-upgrade:
 # Helm uninstall with namespace option
 helm-uninstall:
 	helm uninstall $(HELM_RELEASE_NAME) --namespace $(HELM_NAMESPACE)
-
-# Full deploy including Helm upgrade and Knative setup
-deploy: infra-setup helm-upgrade

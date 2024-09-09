@@ -64,7 +64,7 @@ SceneInferencer::run_inference(
       }
       scene::ImagePatch patch =
           loaders[worker_id]->read_patch_from_coordinates(coord);
-      cv::Mat mask = clients[worker_id]->run_inference(patch.image);
+      cv::Mat mask = clients[worker_id]->request_inference(patch.image);
       saver.save_patch(coord, mask);
     }));
   }
