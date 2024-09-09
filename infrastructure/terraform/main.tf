@@ -39,7 +39,8 @@ resource "google_container_cluster" "primary" {
   network = "default"
 
   # Enabling Autopilot for this cluster
-  enable_autopilot = true
+  enable_autopilot    = true
+  deletion_protection = false
 }
 
 output "cluster_name" {
