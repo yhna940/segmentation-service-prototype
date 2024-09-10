@@ -16,7 +16,7 @@ class InferenceService {
       const std::string& triton_server_url, int patch_size, int stride_size,
       int scaling_factor, bool verbose, int num_classes = 3,
       const std::string& model_name = "Segmentor",
-      const std::string& model_version = "", int max_concurrent_requests = 4)
+      const std::string& model_version = "", int max_concurrent_requests = 8)
       : triton_server_url_(triton_server_url), patch_size_(patch_size),
         stride_size_(stride_size), scaling_factor_(scaling_factor),
         verbose_(verbose),
