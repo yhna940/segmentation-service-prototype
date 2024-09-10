@@ -11,7 +11,7 @@ image:
   repository: lunityounghwan/remote-segmentor-dispatcher
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.1.3"
+  tag: "v0.1.4"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -37,12 +37,12 @@ service:
 
 resources:
   limits:
-    cpu: "4"
-    memory: "16Gi"
+    cpu: "8"
+    memory: "8Gi"
     ephemeral-storage: "10Gi"
   requests:
-    cpu: "4"
-    memory: "8Gi"
+    cpu: "8"
+    memory: "4Gi"
     ephemeral-storage: "10Gi"
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -60,7 +60,7 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 4
   # targetCPUUtilizationPercentage: 40
-  targetMemoryUtilizationPercentage: 30
+  targetMemoryUtilizationPercentage: 40
 
 # Additional volumes on the output Deployment definition.
 volumes:
@@ -88,15 +88,16 @@ affinity: {}
 
 pvs:
   - name: data-pv
-    gcePersistentDisk: test-disk
     storage: 100Gi
     reclaimPolicy: Retain
+    nfsServer: ""
     accessModes:
       - ReadWriteMany
   - name: tmp-pv
     gcePersistentDisk: tmp-disk
     storage: 100Gi
     reclaimPolicy: Delete
+    nfsServer: ""
     accessModes:
       - ReadWriteMany
 pvcs:
@@ -109,7 +110,7 @@ pvcs:
 
 
 volumeAccessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
 
 storageClass: ""
 
@@ -117,7 +118,7 @@ knativeService:
   autoscaling:
     initialScale: 2
     target: 2
-    maxScale: 16
+    maxScale: 8
     scaleDownDelay: "10m"
   nodeSelector:
     accelerator: "nvidia-tesla-t4"

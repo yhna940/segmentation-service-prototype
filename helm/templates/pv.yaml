@@ -8,9 +8,9 @@ spec:
     storage: {{ .storage }}
   accessModes:
     {{- toYaml $.Values.volumeAccessModes | nindent 4 }}
-  gcePersistentDisk:
-    pdName: {{ .gcePersistentDisk }}
-    fsType: ext4
+  nfs:
+    path: /exports/{{ .name }}
+    server: {{ .nfsServer }}
   persistentVolumeReclaimPolicy: {{ .reclaimPolicy }}
   {{- if $.Values.storageClass }}
   storageClassName: {{ $.Values.storageClass }}
