@@ -5,9 +5,12 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <filesystem>
 #include <stdexcept>
 
 namespace scene {
+
+const std::string COUNT_FILENAME_PREFIX = "/tmp/.countmap_";
 
 GdalImageSaver::GdalImageSaver(const std::string& output_path, int num_classes)
     : output_path_(output_path), num_classes_(num_classes),
@@ -32,6 +35,10 @@ GdalImageSaver::clean_up()
   if (count_dataset_) {
     GDALClose(count_dataset_);
     count_dataset_ = nullptr;
+  }
+
+  if (!count_filename_.empty() && std::filesystem::exists(count_filename_)) {
+    std::filesystem::remove(count_filename_);
   }
 }
 
@@ -74,7 +81,7 @@ GdalImageSaver::init_gdal(int width, int height)
 
   // Create count map dataset as a temporary file
   std::string uuid = generate_uuid();
-  count_filename_ = "/tmp/.countmap_" + uuid + ".tif";
+  count_filename_ = COUNT_FILENAME_PREFIX + uuid + ".tif";
   count_dataset_ = driver->Create(
       count_filename_.c_str(), width_, height_, num_classes_, GDT_Int32,
       nullptr);
