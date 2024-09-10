@@ -5,7 +5,7 @@
 replicaCount: 1
 
 strategy:
-  type: Recreate
+  type: RollingUpdate
 
 image:
   repository: lunityounghwan/remote-segmentor-dispatcher
@@ -37,12 +37,12 @@ service:
 
 resources:
   limits:
-    cpu: "8"
+    cpu: "16"
     memory: "8Gi"
     ephemeral-storage: "10Gi"
   requests:
-    cpu: "8"
-    memory: "4Gi"
+    cpu: "16"
+    memory: "8Gi"
     ephemeral-storage: "10Gi"
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -86,18 +86,20 @@ tolerations: []
 
 affinity: {}
 
+nfsServer: "10.77.57.194" # Change this to the IP address of your NFS server
+
 pvs:
   - name: data-pv
     storage: 100Gi
     reclaimPolicy: Retain
-    nfsServer: ""
+    nfsServer: {{ .Values.nfsServer }}
     accessModes:
       - ReadWriteMany
   - name: tmp-pv
     gcePersistentDisk: tmp-disk
     storage: 100Gi
     reclaimPolicy: Delete
-    nfsServer: ""
+    nfsServer: {{ .Values.nfsServer }}
     accessModes:
       - ReadWriteMany
 pvcs:
@@ -118,7 +120,7 @@ knativeService:
   autoscaling:
     initialScale: 2
     target: 2
-    maxScale: 8
+    maxScale: 16
     scaleDownDelay: "10m"
   nodeSelector:
     accelerator: "nvidia-tesla-t4"
