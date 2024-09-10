@@ -1,6 +1,6 @@
 import argparse
 import logging
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 import numpy as np
 import pytriton.decorators as decorators
@@ -23,7 +23,7 @@ class _InferCallable:
         logging.info(f"Model ID: {model_id}")
 
     @decorators.batch
-    def __call__(self, images: np.ndarray) -> np.ndarray:
+    def __call__(self, images: np.ndarray) -> Dict[str, np.ndarray]:
         processed_images = [Image.fromarray(img) for img in images]
 
         results = []
