@@ -1,1 +1,1 @@
-# remote-segmentor-dispatcher
+# remote-segmenter-dispatcher

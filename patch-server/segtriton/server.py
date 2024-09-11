@@ -8,7 +8,7 @@ import torch
 from PIL import Image
 from pytriton.model_config import DynamicBatcher, ModelConfig, Tensor
 from pytriton.triton import Triton
-from segtriton.segmentor import Segmenter
+from segtriton.segmenter import Segmenter
 
 
 class _InferCallable:
@@ -86,7 +86,7 @@ def main():
     with Triton() as triton:
         logging.info("Loading models...")
         triton.bind(
-            model_name="Segmentor",
+            model_name="Segmenter",
             infer_func=multi_device_factory(
                 detector_id=args.model_id,
                 cache_dir=args.cache_dir,

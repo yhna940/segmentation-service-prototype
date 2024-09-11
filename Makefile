@@ -1,11 +1,11 @@
 # Variables
-PATCH_SERVER_IMAGE_NAME = lunityounghwan/remote-segmentor-patch-server
-DISPATCHER_IMAGE_NAME = lunityounghwan/remote-segmentor-dispatcher
+PATCH_SERVER_IMAGE_NAME = lunityounghwan/remote-segmenter-patch-server
+DISPATCHER_IMAGE_NAME = lunityounghwan/remote-segmenter-dispatcher
 TAG ?= latest
 PLATFORM ?= linux/amd64
 TERRAFORM_DIR = ./infrastructure/terraform
 HELM_NAMESPACE ?= default
-HELM_RELEASE_NAME = remote-segmentor
+HELM_RELEASE_NAME = remote-segmenter
 HELM_CHART_PATH = ./helm
 
 # Build patch-server Docker image with optional TAG argument

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Set the project name
-project(remote-segmentor-dispatcher VERSION 1.0 LANGUAGES CXX)
+project(remote-segmenter-dispatcher VERSION 1.0 LANGUAGES CXX)
 message(STATUS "Project: ${PROJECT_NAME}")
 
 # Set the C++ standard to be used

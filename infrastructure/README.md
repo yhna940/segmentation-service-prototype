@@ -1,1 +1,1 @@
-# segmentor-service-infra
+# segmenter-service-infra
