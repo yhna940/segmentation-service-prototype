@@ -31,4 +31,4 @@ RUN rm -rf build && mkdir build && cd build && \
     cmake --build .
 
 # Set the entry point to run the built executable
-ENTRYPOINT ["/app/build/remote-segmentor-dispatcher"]
+ENTRYPOINT ["/app/build/remote-segmenter-dispatcher"]
